@@ -1,0 +1,77 @@
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card {
+  transition: all 0.5s;
+}
+
+.td_selector.active{
+    background-color: #fbfbfb;
+}
+
+.shareimg, .topimg{
+    /*filter: invert(50%);*/ 
+    -webkit-filter: invert(20%);
+    height: 30px;
+    /*filter: hue-rotate(90deg);
+    filter: brightness(5.25);*/
+    filter: brightness(0.9) invert(.35) sepia(.5) hue-rotate(180deg) saturate(2000%);
+    transition:all 0.3s ease-in;
+
+
+
+}
+.shareimg:hover,.topimg:hover {
+    filter: invert(0%);
+    -webkit-filter: invert(0%);
+    height: 30px;
+    filter: brightness(0.9) invert(.20) sepia(.5) hue-rotate(180deg) saturate(2000%);
+    transition:all 0.3s ease-in;
+}
+
+/* 
+VITE STANDARD CSS
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+ */
