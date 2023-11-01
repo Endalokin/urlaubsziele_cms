@@ -4,11 +4,14 @@ import React, { useEffect,useState } from 'react'
 import FactsTable from './FactsTable'
 import fetchData from '../../../utils/fetchAPI'
 import DetailPageImage from './DetailPageImage';
+import { useParams } from 'react-router-dom';
 
 export default function DetailPage({}) {
 
-    const id = "11kuRvuGnGSd85UbY0i5ao";
+    //const id = "11kuRvuGnGSd85UbY0i5ao";
+    const {id} = useParams();
     const {VITE_CF_TOKEN,VITE_SPACE_ID} = import.meta.env;
+    
 
     function handleData(data)
     {
@@ -90,11 +93,11 @@ export default function DetailPage({}) {
                         <div className="row">
                             <div className=" col">
                                 <a href="#page_top"  >
-                                    <img src="./src/assets/to-top-b.svg" className="topimg" />
+                                    <img src="../src/assets/to-top-b.svg" className="topimg" />
                                 </a>
                             </div>
                             <div className="sharecountry col">
-                                <img src="./src/assets/share.svg" className="shareimg" />
+                                <img src="../src/assets/share.svg" className="shareimg" />
                             </div>
                         </div>
                     </div>
