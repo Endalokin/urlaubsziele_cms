@@ -7,6 +7,7 @@ import fetchData from '../../../utils/fetchAPI'
 export default function DetailPage() {
 
     const id = "11kuRvuGnGSd85UbY0i5ao";
+    const {VITE_CF_TOKEN,VITE_SPACE_ID} = import.meta.env;
 
     function handleData(data)
     {
@@ -18,7 +19,7 @@ export default function DetailPage() {
 
     //tmp url for single Entry
 
-    const url = `https://cdn.contentful.com/spaces/8es1vct37z1y/entries/${id}?access_token=z9I4_II-o6y3ZX7lTgQxu2EU3ctK6C0dvKqGqG7JXKs`
+    const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries/${id}?access_token=${VITE_CF_TOKEN}`
 
     useEffect(()=>{
         fetchData(url,handleData)
@@ -76,7 +77,7 @@ export default function DetailPage() {
                                 </div>
                                 <div className="row py-3 ">
                                     <div className="col-lg-8 col-xl-6 col-10">
-                                        <FactsTable language={_data.language} residents={_data.residents} area={_data.area} />
+                                        <FactsTable languages={_data.languages} residents={_data.residents} area={_data.area} />
                                     </div>
                                     <div className="col-lg-1 col-xl-3 d-none d-lg-block">
                                     </div>
