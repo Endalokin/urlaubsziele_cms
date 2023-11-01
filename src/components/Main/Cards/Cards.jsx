@@ -1,4 +1,5 @@
 import React from 'react'
+import Card from './Card'
 import fetchData from '../../../utils/fetchAPI'
 
 
