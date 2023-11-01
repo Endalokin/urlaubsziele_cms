@@ -32,8 +32,6 @@ export default function DetailPage({}) {
         MainOutput
     )
 
-
-
     function createDetails(_data)
     {
         return(
