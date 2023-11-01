@@ -3,6 +3,7 @@
 import React, { useEffect,useState } from 'react'
 import FactsTable from './FactsTable'
 import fetchData from '../../../utils/fetchAPI'
+import DetailPageImage from './DetailPageImage';
 
 export default function DetailPage() {
 
@@ -25,13 +26,7 @@ export default function DetailPage() {
         fetchData(url,handleData)
     },[]);
 
-
-
     const MainOutput = countryData? createDetails(countryData) : <div>NoData,loading</div>
-
-
-
-
 
     return (
         MainOutput
@@ -82,7 +77,7 @@ export default function DetailPage() {
                                     <div className="col-lg-1 col-xl-3 d-none d-lg-block">
                                     </div>
                                     <div className="col-lg-3 col-xl-3 col-2">
-                                        <img src="images/svg/bgr.svg" className="img-fluid shadow border border-secondary border-opacity-25 border-2" id="selected_dest_flagpath" alt="Flagge des Landes" />
+                                        <DetailPageImage/>
                                     </div>
                                 </div>
                             </div>
