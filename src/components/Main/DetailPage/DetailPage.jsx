@@ -5,7 +5,7 @@ import FactsTable from './FactsTable'
 import fetchData from '../../../utils/fetchAPI'
 import DetailPageImage from './DetailPageImage';
 
-export default function DetailPage() {
+export default function DetailPage({}) {
 
     const id = "11kuRvuGnGSd85UbY0i5ao";
     const {VITE_CF_TOKEN,VITE_SPACE_ID} = import.meta.env;
@@ -77,14 +77,14 @@ export default function DetailPage() {
                                     <div className="col-lg-1 col-xl-3 d-none d-lg-block">
                                     </div>
                                     <div className="col-lg-3 col-xl-3 col-2">
-                                        <DetailPageImage/>
+                                        <DetailPageImage assetID={_data.flag.sys.id} classname={"img-fluid shadow border border-secondary border-opacity-25 border-2"} htmlID={"selected_dest_flagpath"} alt={"Flagge des Landes"}/>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="col-12 col-md-6 text-center">
-                        <img id="selected_dest_imagepath" src="images/schweden_800px.jpg" alt="country" className="img-fluid object-fit-cover rounded" style={{ height: "100%" }} />
+                       <DetailPageImage assetID={_data.image.sys.id} classname={"img-fluid object-fit-cover rounded"} htmlID={"selected_dest_imagepath"} alt="country" style={{ height: "100%" }}/>
                     </div>
                 </div>
                 <div className="row">
