@@ -6,15 +6,16 @@ export default async function fetchData(url,dataCallback,abortSignal)
 
     try{
         const response = await fetch(url,{abortSignal});
-        console.log("Response", response);
+        //console.log("Response", response);
         const data = await response.json();
-        console.log("Data", data);
+        //console.log("Data", data);
         dataCallback(data);
 
     }
     catch(error)
     {
         console.log("Error", error.message);
+        
 
     }
 
