@@ -1,4 +1,5 @@
 import React from 'react'
+import FactsTable from './FactsTable'
 
 export default function DetailPage() {
     return (
