@@ -1,6 +1,16 @@
 import React from 'react'
+import FactsTable from './FactsTable'
+import fetchData from '../../../utils/fetchAPI'
 
 export default function DetailPage() {
+
+    //tmp url for single Entry
+
+    // https://cdn.contentful.com/spaces/8es1vct37z1y/entries/11kuRvuGnGSd85UbY0i5ao?access_token=z9I4_II-o6y3ZX7lTgQxu2EU3ctK6C0dvKqGqG7JXKs
+
+
+
+
     return (
         <div id="div_id" className="container py-4" >
             <div className="row bg-light bg-opacity-75 rounded">
