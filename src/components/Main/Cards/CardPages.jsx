@@ -35,7 +35,7 @@ export default function CardPages({ countryCards }) {
         <>
             <div className="container py-4" id="overview">
                 <nav aria-label="Page navigation example">
-                    <ul className="pagination">
+                    <ul className="pagination justify-content-center">
                         <PrevPageNumber setCurrentPage={setCurrentPage} pages={pages} />
                         {pageNumbers()}
                         <NextPageNumber setCurrentPage={setCurrentPage} pages={pages} />
