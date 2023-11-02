@@ -9,7 +9,7 @@ export default function PrevPageNumber({setCurrentPage, pages}) {
 
     return (
         <li className="page-item">
-            <a className="page-link" href="#" aria-label="Previous" onClick={prevPage}>
+            <a className="page-link link-success" href="#" aria-label="Previous" onClick={prevPage}>
                 <span aria-hidden="true">&laquo;</span>
             </a>
         </li>

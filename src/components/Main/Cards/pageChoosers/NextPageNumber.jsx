@@ -10,7 +10,7 @@ export default function NextPageNumber({setCurrentPage, pages}) {
 
     return (
         <li className="page-item">
-            <a className="page-link" href="#" aria-label="Next" onClick={nextPage}>
+            <a className="page-link link-success" href="#" aria-label="Next" onClick={nextPage}>
                 <span aria-hidden="true">&raquo;</span>
             </a>
         </li>
