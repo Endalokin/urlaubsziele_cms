@@ -21,7 +21,7 @@ export default function DetailPageImage({assetID, classname, htmlID,alt,style})
 
     function handleAssetData(assetData)
     {
-        console.log("Asset:", assetData);
+        //console.log("Asset:", assetData);
         setImgURL(assetData.fields.file.url)
     }
 

@@ -1,13 +1,38 @@
 import React from 'react'
 import SearchBar from './SearchBar'
+import { useState,useEffect } from 'react'
+import fetchData from '../../utils/fetchAPI';
 
 export default function Header() {
+
+    const { VITE_CF_TOKEN, VITE_SPACE_ID } = import.meta.env;
+
+    const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/2Hqzvhz0dtS6jzvpvizZGu?access_token=${VITE_CF_TOKEN}`
+
+    const [logoURL,setLogoURL] = useState();
+
+    useEffect(()=> {
+
+        fetchData(url,handleLogoURL)
+
+
+
+    },[]);
+
+    function handleLogoURL(data)
+    {
+        console.log("Logo:",data.fields.file.url)
+        setLogoURL(data.fields.file.url);
+    }
+
+
+
     return (
         <header>
             <nav id="page_top" className="navbar navbar-expand-lg sticky-top bg-body-tertiary">
                 <div className="container mx-auto justify">
                     <a className="navbar-brand" href="#">
-                        <img src="./src/assets/logo.png" alt="Logo" width="100" />
+                        <img src={logoURL} alt="Logo" width="100" />
                     </a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
