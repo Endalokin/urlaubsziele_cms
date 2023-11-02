@@ -5,7 +5,7 @@ import PrevPageNumber from './pageChoosers/PrevPageNumber'
 import NextPageNumber from './pageChoosers/NextPageNumber'
 
 export default function CardPages({ countryCards }) {
-    const pages = Math.ceil(countryCards.length / 6)
+    const pages = Math.ceil(countryCards?.length / 6)
     const [currentPage, setCurrentPage] = useState(1)
     const displayCountryCards = []
 

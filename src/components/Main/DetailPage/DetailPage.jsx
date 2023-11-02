@@ -4,9 +4,14 @@ import React, { useEffect, useState } from 'react'
 import FactsTable from './FactsTable'
 import fetchData from '../../../utils/fetchAPI'
 import DetailPageImage from './DetailPageImage';
+import LocationMap from "./LocationMap"
 import { useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function DetailPage({ }) {
+
+
+    //https://app.contentful.com/spaces/8es1vct37z1y/assets/79MohGKY7i8ilc0OSAa288
 
     //const id = "11kuRvuGnGSd85UbY0i5ao";
     const { id } = useParams();
@@ -14,18 +19,35 @@ export default function DetailPage({ }) {
 
 
     function handleData(data) {
-        console.log("handleData:", data.fields);
+        //console.log("handleData:", data.fields);
         setCountryData(data.fields)
     }
 
+    function handleShareBtnURL(data)
+    {
+        console.log("Share:",data.fields.file.url)
+        setShareBtnURL(data.fields.file.url);
+    }
+    function handleNavBtnURL(data)
+    {
+        console.log("Share:",data.fields.file.url)
+        setNavBtnURL(data.fields.file.url);
+    }
+
     const [countryData, setCountryData] = useState();
+    const [shareBtnURL,setShareBtnURL] = useState();
+    const [navBtnURL,setNavBtnURL] = useState();
 
     //tmp url for single Entry
 
     const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries/${id}?access_token=${VITE_CF_TOKEN}`
+    const shareurl = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/48CvpYGYtsrxDC9QQr2xi9?access_token=${VITE_CF_TOKEN}`
+    const navurl = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/79MohGKY7i8ilc0OSAa288?access_token=${VITE_CF_TOKEN}`
 
     useEffect(() => {
-        fetchData(url, handleData)
+        fetchData(url, handleData);
+        fetchData(shareurl,handleShareBtnURL);
+        fetchData(navurl,handleNavBtnURL);
     }, []);
 
     const MainOutput = countryData ? createDetails(countryData) : <div>NoData,loading</div>
@@ -38,7 +60,7 @@ export default function DetailPage({ }) {
         return (
 
             <div id="div_id" className="container py-4" >
-                <button>Back</button>
+                <NavLink to={`/`} className="link-dark link-underline link-underline-opacity-0"><button>Back</button></NavLink>
                 <div className="row bg-light bg-opacity-75 rounded">
                     <div className="col">
                         <div className="row">
@@ -92,17 +114,18 @@ export default function DetailPage({ }) {
                                 <div className="row">
                                     <div className=" col">
                                         <a href="#page_top"  >
-                                            <img src="../src/assets/to-top-b.svg" className="topimg" />
+                                            <img src={navBtnURL} className="topimg" />
                                         </a>
                                     </div>
                                     <div className="sharecountry col">
-                                        <img src="../src/assets/share.svg" className="shareimg" />
+                                        <img src={shareBtnURL} className="shareimg" />
                                     </div>
                                 </div>
                             </div>
                             <div className="col-10">
                             </div>
                         </div>
+                        <div id="map">{countryData.location && <LocationMap location={countryData.location}/>}</div>
                     </div>
                 </div>
             </div>
