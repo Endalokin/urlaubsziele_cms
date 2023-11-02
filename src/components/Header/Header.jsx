@@ -1,5 +1,6 @@
 import React from 'react'
 import SearchBar from './SearchBar'
+import { HashLink } from 'react-router-hash-link'
 
 export default function Header() {
     return (
@@ -15,7 +16,7 @@ export default function Header() {
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                             <li className="nav-item">
-                                <a className="nav-link active" aria-current="page" href="#Urlaubsziele">Urlaubsziele</a>
+                                <HashLink className="nav-link active" to="/#overview">Urlaubsziele</HashLink>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" href="#Über uns">Über uns</a>

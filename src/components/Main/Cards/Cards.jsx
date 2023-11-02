@@ -21,7 +21,7 @@ export default function Cards() {
     }, []);
 
     function createCards () {
-        return countryArray.map((country) => <Card
+        return countryArray?.map((country) => <Card
                     key={country?.fields.name}
                     country={country?.fields.name}
                     imgId={country?.fields.image.sys.id}
