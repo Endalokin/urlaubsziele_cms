@@ -8,7 +8,7 @@ export default function Main() {
         <main>
             <TitleImg />
             <Cards />
-            <DetailPage />
+
         </main>
     )
 }
