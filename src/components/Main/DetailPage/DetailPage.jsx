@@ -4,7 +4,9 @@ import React, { useEffect, useState } from 'react'
 import FactsTable from './FactsTable'
 import fetchData from '../../../utils/fetchAPI'
 import DetailPageImage from './DetailPageImage';
+import LocationMap from "./LocationMap"
 import { useParams } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default function DetailPage({ }) {
 
@@ -38,7 +40,7 @@ export default function DetailPage({ }) {
         return (
 
             <div id="div_id" className="container py-4" >
-                <button>Back</button>
+                <NavLink to={`/`} className="link-dark link-underline link-underline-opacity-0"><button>Back</button></NavLink>
                 <div className="row bg-light bg-opacity-75 rounded">
                     <div className="col">
                         <div className="row">
@@ -103,6 +105,7 @@ export default function DetailPage({ }) {
                             <div className="col-10">
                             </div>
                         </div>
+                        <div id="map">{countryData.location && <LocationMap location={countryData.location}/>}</div>
                     </div>
                 </div>
             </div>
