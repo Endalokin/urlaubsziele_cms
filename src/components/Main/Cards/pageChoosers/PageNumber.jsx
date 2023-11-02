@@ -1,7 +1,6 @@
 import React from 'react'
 
 export default function PageNumber({page, active, setCurrentPage}) {
-    console.log(page)
 
     function getPage (e) {
         e.preventDefault()
