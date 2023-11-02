@@ -8,6 +8,9 @@ import { useParams } from 'react-router-dom';
 
 export default function DetailPage({ }) {
 
+
+    //https://app.contentful.com/spaces/8es1vct37z1y/assets/79MohGKY7i8ilc0OSAa288
+
     //const id = "11kuRvuGnGSd85UbY0i5ao";
     const { id } = useParams();
     const { VITE_CF_TOKEN, VITE_SPACE_ID } = import.meta.env;
@@ -18,14 +21,31 @@ export default function DetailPage({ }) {
         setCountryData(data.fields)
     }
 
+    function handleShareBtnURL(data)
+    {
+        console.log("Share:",data.fields.file.url)
+        setShareBtnURL(data.fields.file.url);
+    }
+    function handleNavBtnURL(data)
+    {
+        console.log("Share:",data.fields.file.url)
+        setNavBtnURL(data.fields.file.url);
+    }
+
     const [countryData, setCountryData] = useState();
+    const [shareBtnURL,setShareBtnURL] = useState();
+    const [navBtnURL,setNavBtnURL] = useState();
 
     //tmp url for single Entry
 
     const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries/${id}?access_token=${VITE_CF_TOKEN}`
+    const shareurl = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/48CvpYGYtsrxDC9QQr2xi9?access_token=${VITE_CF_TOKEN}`
+    const navurl = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/79MohGKY7i8ilc0OSAa288?access_token=${VITE_CF_TOKEN}`
 
     useEffect(() => {
-        fetchData(url, handleData)
+        fetchData(url, handleData);
+        fetchData(shareurl,handleShareBtnURL);
+        fetchData(navurl,handleNavBtnURL);
     }, []);
 
     const MainOutput = countryData ? createDetails(countryData) : <div>NoData,loading</div>
@@ -92,11 +112,11 @@ export default function DetailPage({ }) {
                                 <div className="row">
                                     <div className=" col">
                                         <a href="#page_top"  >
-                                            <img src="../src/assets/to-top-b.svg" className="topimg" />
+                                            <img src={navBtnURL} className="topimg" />
                                         </a>
                                     </div>
                                     <div className="sharecountry col">
-                                        <img src="../src/assets/share.svg" className="shareimg" />
+                                        <img src={shareBtnURL} className="shareimg" />
                                     </div>
                                 </div>
                             </div>
