@@ -19,7 +19,7 @@ export default function DetailPage({ }) {
 
 
     function handleData(data) {
-        console.log("handleData:", data.fields);
+        //console.log("handleData:", data.fields);
         setCountryData(data.fields)
     }
 
