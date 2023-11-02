@@ -10,6 +10,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Main />}/>
+
       <Route path="/detailPage/:id" element={<DetailPage />}/>
     </Route>
 
