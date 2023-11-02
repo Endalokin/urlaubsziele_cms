@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PageNumber from './pageChoosers/PageNumber'
 import DisplayCards from "./DisplayCards"
-import PrevPageNumber from './pageChoosers/prevPageNumber'
-import NextPageNumber from './pageChoosers/nextPageNumber'
+import PrevPageNumber from './pageChoosers/PrevPageNumber'
+import NextPageNumber from './pageChoosers/NextPageNumber'
 
 export default function CardPages({ countryCards }) {
     const pages = Math.ceil(countryCards.length / 6)
