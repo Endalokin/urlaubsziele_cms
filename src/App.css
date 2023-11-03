@@ -33,3 +33,7 @@
 #map {
   min-height: 380px
 }
+
+.card-img-top {
+  max-height:400px
+}
