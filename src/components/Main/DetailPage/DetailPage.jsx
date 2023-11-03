@@ -7,6 +7,7 @@ import DetailPageImage from './DetailPageImage';
 import LocationMap from "./LocationMap"
 import { useParams } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
+import Head from '../../../utils/Head';
 
 export default function DetailPage({ }) {
 
@@ -23,20 +24,18 @@ export default function DetailPage({ }) {
         setCountryData(data.fields)
     }
 
-    function handleShareBtnURL(data)
-    {
-        console.log("Share:",data.fields.file.url)
+    function handleShareBtnURL(data) {
+        console.log("Share:", data.fields.file.url)
         setShareBtnURL(data.fields.file.url);
     }
-    function handleNavBtnURL(data)
-    {
-        console.log("Share:",data.fields.file.url)
+    function handleNavBtnURL(data) {
+        console.log("Share:", data.fields.file.url)
         setNavBtnURL(data.fields.file.url);
     }
 
     const [countryData, setCountryData] = useState();
-    const [shareBtnURL,setShareBtnURL] = useState();
-    const [navBtnURL,setNavBtnURL] = useState();
+    const [shareBtnURL, setShareBtnURL] = useState();
+    const [navBtnURL, setNavBtnURL] = useState();
 
     //tmp url for single Entry
 
@@ -46,8 +45,8 @@ export default function DetailPage({ }) {
 
     useEffect(() => {
         fetchData(url, handleData);
-        fetchData(shareurl,handleShareBtnURL);
-        fetchData(navurl,handleNavBtnURL);
+        fetchData(shareurl, handleShareBtnURL);
+        fetchData(navurl, handleNavBtnURL);
     }, []);
 
     const MainOutput = countryData ? createDetails(countryData) : <div>NoData,loading</div>
@@ -58,8 +57,8 @@ export default function DetailPage({ }) {
 
     function createDetails(_data) {
         return (
-
             <div id="div_id" className="container py-4" >
+                <Head title={`Urlaubsziel ${_data.name}`} descr={`Wir präsentieren Ihnen: ${_data.tagline}`} />
                 <NavLink to={`/`} className="link-dark link-underline link-underline-opacity-0"><button>Back</button></NavLink>
                 <div className="row bg-light bg-opacity-75 rounded">
                     <div className="col">
@@ -125,7 +124,7 @@ export default function DetailPage({ }) {
                             <div className="col-10">
                             </div>
                         </div>
-                        <div id="map">{countryData.location && <LocationMap location={countryData.location}/>}</div>
+                        <div id="map">{countryData.location && <LocationMap location={countryData.location} />}</div>
                     </div>
                 </div>
             </div>
