@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react'
 import fetchData from '../../../utils/fetchAPI';
 import { NavLink } from 'react-router-dom';
 
-export default function Card({country, imgId, text, detailsId}) {
-    const {VITE_CF_TOKEN,VITE_SPACE_ID} = import.meta.env;
-    const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/${imgId}?access_token=${VITE_CF_TOKEN}`;
+export default function Card({ country, imgId, text, detailsId }) {
+    const { VITE_CF_TOKEN, VITE_SPACE_ID } = import.meta.env;
+    const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/${imgId}?access_token=${VITE_CF_TOKEN}&w=100`;
     const [imgUrl, setImgUrl] = useState("")
 
     function handleData(data) {
-        setImgUrl(data.fields.file.url)
+        setImgUrl(data.fields.file.url + "?fm=webp&h=500")
     }
 
     useEffect(() => {
         fetchData(url, handleData)
     }, []);
-    
+
     return (
         <>
             <div className="col">
