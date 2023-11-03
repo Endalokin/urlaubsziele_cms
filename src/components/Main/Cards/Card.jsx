@@ -8,7 +8,7 @@ export default function Card({ country, imgId, text, detailsId }) {
     const [imgUrl, setImgUrl] = useState("")
 
     function handleData(data) {
-        setImgUrl(data.fields.file.url + "?fm=webp&h=500")
+        setImgUrl(data.fields.file.url + "?fm=webp&h=400")
     }
 
     useEffect(() => {
