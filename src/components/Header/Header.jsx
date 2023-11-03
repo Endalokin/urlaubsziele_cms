@@ -15,14 +15,11 @@ export default function Header() {
     useEffect(()=> {
 
         fetchData(url,handleLogoURL)
-
-
-
     },[]);
 
     function handleLogoURL(data)
     {
-        console.log("Logo:",data.fields.file.url)
+        //console.log("Logo:",data.fields.file.url)
         setLogoURL(data.fields.file.url);
     }
 
