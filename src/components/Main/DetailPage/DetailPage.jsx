@@ -8,6 +8,7 @@ import LocationMap from "./LocationMap"
 import { useParams, useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import Head from '../../../utils/Head';
+import NotFoundPage from '../Other/NotFoundPage';
 
 export default function DetailPage({ }) {
 
@@ -22,6 +23,8 @@ export default function DetailPage({ }) {
 
     function handleData(data) {
         //console.log("handleData:", data.fields);
+        console.log(data.sys.id)
+        console.log(data)
         setCountryData(data.fields)
     }
 
@@ -34,7 +37,7 @@ export default function DetailPage({ }) {
         setNavBtnURL(data.fields.file.url);
     }
 
-    const navigate=useNavigate()
+    const navigate = useNavigate()
     const [countryData, setCountryData] = useState();
     const [shareBtnURL, setShareBtnURL] = useState();
     const [navBtnURL, setNavBtnURL] = useState();
