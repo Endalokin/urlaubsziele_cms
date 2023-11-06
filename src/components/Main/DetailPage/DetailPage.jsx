@@ -8,7 +8,7 @@ import LocationMap from "./LocationMap"
 import { useParams, useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import Head from '../../../utils/Head';
-import NotFoundPage from '../Other/NotFoundPage';
+import ErrorPage from '../Other/ErrorPage';
 
 export default function DetailPage({ }) {
 
@@ -19,12 +19,14 @@ export default function DetailPage({ }) {
     //const id = "11kuRvuGnGSd85UbY0i5ao";
     const { id } = useParams();
     const { VITE_CF_TOKEN, VITE_SPACE_ID } = import.meta.env;
-
+    let [errorResponse, setErrorResponse] = useState("Data is loading...");
 
     function handleData(data) {
         //console.log("handleData:", data.fields);
-        console.log(data.sys.id)
-        console.log(data)
+        if (data.sys.id == "NotFound") {
+            setErrorResponse(`${data.sys.id}: ${data.message}`)
+        }
+
         setCountryData(data.fields)
     }
 
@@ -54,7 +56,7 @@ export default function DetailPage({ }) {
         fetchData(navurl, handleNavBtnURL);
     }, []);
 
-    const MainOutput = countryData ? createDetails(countryData) : <div>NoData,loading</div>
+    const MainOutput = countryData ? createDetails(countryData) : <ErrorPage errorText={errorResponse}/>
 
     return (
         MainOutput
