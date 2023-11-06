@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react';
 import fetchData from '../../utils/fetchAPI';
+import { useNavigate } from 'react-router-dom';
 
 export default function SearchBar() {
 
@@ -12,6 +13,9 @@ export default function SearchBar() {
 
     const { VITE_CF_TOKEN, VITE_SPACE_ID } = import.meta.env;
 
+    const navigate = useNavigate();
+
+
 
     function handleInput(input)
     {
@@ -19,6 +23,14 @@ export default function SearchBar() {
             console.log("SearchTrigger")
             setSearchValue(input)
             fetchData(url,handleSearchResult)
+    }
+
+    const handleSubmit = (e) =>
+    {
+        e.preventDefault();
+        console.log("Submit: ",e, searchValue)
+        
+        navigate(`searchPage/${searchValue}`);
     }
 
     function handleSearchResult(_data,timeStamp)
@@ -41,10 +53,10 @@ export default function SearchBar() {
 //        <form className="d-flex" role="search">         </form>
     return (
             <>
-            <div className="d-flex" role="search">
+            <form className="d-flex" role="search" onSubmit={handleSubmit}>
             <input className="form-control me-2" onChange={e => handleInput(e.target.value)} value={searchValue} type="search" placeholder="Urlaubsziel suchen" aria-label="search" id="datatable-search-input" />
             <button className="btn btn-outline-success fw-medium" type="submit">Suchen</button>
-            </div>
+            </form>
             </>
     )
 }
