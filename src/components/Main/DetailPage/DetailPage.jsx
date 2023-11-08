@@ -56,7 +56,9 @@ export default function DetailPage({ }) {
         fetchData(navurl, handleNavBtnURL);
     }, []);
 
-    const MainOutput = countryData ? createDetails(countryData) : <ErrorPage errorText={errorResponse}/>
+    const loadingError=false;
+
+    const MainOutput = loadingError == true ? <div>Fehler beim laden</div> : countryData ? createDetails(countryData) : <div>NoData,loading</div>
 
     return (
         MainOutput
