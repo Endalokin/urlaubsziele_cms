@@ -1,7 +1,7 @@
 import React from 'react'
 import SearchBar from './SearchBar'
 import { HashLink } from 'react-router-hash-link'
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import fetchData from '../../utils/fetchAPI';
 
 export default function Header() {
@@ -10,9 +10,11 @@ export default function Header() {
 
     const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/2Hqzvhz0dtS6jzvpvizZGu?access_token=${VITE_CF_TOKEN}`
 
-    const [logoURL,setLogoURL] = useState();
+    const [logoURL, setLogoURL] = useState();
+    const [displayItems, setDisplayItems] = useState("collapse")
 
-    useEffect(()=> {
+    useEffect(() => {
+
 
         fetchData(url,handleLogoURL)
     },[]);
@@ -23,20 +25,24 @@ export default function Header() {
         setLogoURL(data.fields.file.url);
     }
 
+    function toggleDisplay(e) {
+        e.preventDefault()
+        setDisplayItems((prev) => prev == "collapse" ? "" : "collapse")
+    }
 
 
     return (
         <header>
             <nav id="page_top" className="navbar navbar-expand-lg sticky-top bg-body-tertiary">
-                <div className="container mx-auto justify">
+                <div className="container-fluid container mx-auto justify">
                     <a className="navbar-brand" href="#">
                         <img src={logoURL} alt="Logo" width="100" />
                     </a>
-                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation" onClick={toggleDisplay}>
                         <span className="navbar-toggler-icon"></span>
                     </button>
-                    <div className="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+                    <div className={`${displayItems} navbar-collapse`} id="navbarTogglerDemo03">
+                        <ul className="container navbar-nav align-items-center">
                             <li className="nav-item">
                                 <HashLink className="nav-link active" to="/#overview">Urlaubsziele</HashLink>
                             </li>
@@ -48,7 +54,6 @@ export default function Header() {
                     </div>
                 </div>
             </nav>
-
         </header >
     )
 }
