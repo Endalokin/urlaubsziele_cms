@@ -1,5 +1,5 @@
 import { useEffect,useState } from "react";
-import fetchData from "../../../utils/fetchAPI";
+import fetchData, { fetchDataMulti } from "../../../utils/fetchAPI";
 import { useParams } from "react-router-dom";
 
 export default function SearchResultPage()
@@ -15,23 +15,28 @@ export default function SearchResultPage()
     //
     //countryDetails
 
+    const dataReady = new Promise(function(resolve,reject){
+
+            setTimeout(()=> {reject(new Error("Da ist was schiefgelaufen."))},10000)
+  
+            resolve("ready")
+    });
+
+    fetchDataMulti([url1,url2],handleSearchResults)
 
     useEffect(()=> {
-        fetchData(url1,handleCountryDetails);
-        fetchData(url2,handleCountryCards);
+
+        //fetchData(url1,handleCountryDetails);
+        //fetchData(url2,handleCountryCards);
+        //Start Async to Wait for Results
 
     },[])
 
-    function handleCountryDetails(data)
+    function handleSearchResults(data)
     {
-        console.log("CountryDetailsSearch:", data)
+        console.log("CountryDetails+CardsSearch:", data)
+        //Todo Hole Werte
 
-    }
-
-    function handleCountryCards(data)
-    {
-
-        
     }
 
     return (<div>SearchResults</div>
