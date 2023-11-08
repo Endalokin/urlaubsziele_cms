@@ -5,11 +5,13 @@ import FactsTable from './FactsTable'
 import fetchData from '../../../utils/fetchAPI'
 import DetailPageImage from './DetailPageImage';
 import LocationMap from "./LocationMap"
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { NavLink } from 'react-router-dom';
 import Head from '../../../utils/Head';
+import ErrorPage from '../Other/ErrorPage';
 
 export default function DetailPage({ }) {
+
 
 
     //https://app.contentful.com/spaces/8es1vct37z1y/assets/79MohGKY7i8ilc0OSAa288
@@ -17,10 +19,14 @@ export default function DetailPage({ }) {
     //const id = "11kuRvuGnGSd85UbY0i5ao";
     const { id } = useParams();
     const { VITE_CF_TOKEN, VITE_SPACE_ID } = import.meta.env;
-
+    let [errorResponse, setErrorResponse] = useState("Data is loading...");
 
     function handleData(data) {
         //console.log("handleData:", data.fields);
+        if (data.sys.id == "NotFound") {
+            setErrorResponse(`${data.sys.id}: ${data.message}`)
+        }
+
         setCountryData(data.fields)
     }
 
@@ -33,6 +39,7 @@ export default function DetailPage({ }) {
         setNavBtnURL(data.fields.file.url);
     }
 
+    const navigate = useNavigate()
     const [countryData, setCountryData] = useState();
     const [shareBtnURL, setShareBtnURL] = useState();
     const [navBtnURL, setNavBtnURL] = useState();
@@ -61,7 +68,7 @@ export default function DetailPage({ }) {
         return (
             <div id="div_id" className="container py-4" >
                 <Head title={`Urlaubsziel ${_data.name}`} descr={`Wir präsentieren Ihnen: ${_data.tagline}`} />
-                <NavLink to={`/`} className="link-dark link-underline link-underline-opacity-0"><button>Back</button></NavLink>
+                <button onClick={() => navigate(-1)} className="btn mb-4">{`❮`}</button>
                 <div className="row bg-light bg-opacity-75 rounded">
                     <div className="col">
                         <div className="row">
