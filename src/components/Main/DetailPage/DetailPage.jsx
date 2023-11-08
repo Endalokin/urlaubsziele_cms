@@ -31,11 +31,11 @@ export default function DetailPage({ }) {
     }
 
     function handleShareBtnURL(data) {
-        console.log("Share:", data.fields.file.url)
+        //console.log("Share:", data.fields.file.url)
         setShareBtnURL(data.fields.file.url);
     }
     function handleNavBtnURL(data) {
-        console.log("Share:", data.fields.file.url)
+        //console.log("Share:", data.fields.file.url)
         setNavBtnURL(data.fields.file.url);
     }
 
