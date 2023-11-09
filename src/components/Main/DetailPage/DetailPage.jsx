@@ -22,7 +22,7 @@ export default function DetailPage({ }) {
     let [errorResponse, setErrorResponse] = useState("Data is loading...");
 
     function handleData(data) {
-        //console.log("handleData:", data.fields);
+/*         console.log("handleData:", data.fields); */
         if (data.sys.id == "NotFound") {
             setErrorResponse(`${data.sys.id}: ${data.message}`)
         }
@@ -31,11 +31,11 @@ export default function DetailPage({ }) {
     }
 
     function handleShareBtnURL(data) {
-        console.log("Share:", data.fields.file.url)
+        //console.log("Share:", data.fields.file.url)
         setShareBtnURL(data.fields.file.url);
     }
     function handleNavBtnURL(data) {
-        console.log("Share:", data.fields.file.url)
+        //console.log("Share:", data.fields.file.url)
         setNavBtnURL(data.fields.file.url);
     }
 
@@ -50,13 +50,19 @@ export default function DetailPage({ }) {
     const shareurl = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/48CvpYGYtsrxDC9QQr2xi9?access_token=${VITE_CF_TOKEN}`
     const navurl = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/79MohGKY7i8ilc0OSAa288?access_token=${VITE_CF_TOKEN}`
 
+    const [imgBorderColor, setImgBorderColor] = useState("white")
+    const [containerBorderColor, setContainerBorderColor] = useState("50,50,50")
+
+
     useEffect(() => {
         fetchData(url, handleData);
         fetchData(shareurl, handleShareBtnURL);
         fetchData(navurl, handleNavBtnURL);
     }, []);
 
-    const MainOutput = countryData ? createDetails(countryData) : <ErrorPage errorText={errorResponse}/>
+    const loadingError=false;
+
+    const MainOutput = loadingError == true ? <div>Fehler beim laden</div> : countryData ? createDetails(countryData) : <div>NoData,loading</div>
 
     return (
         MainOutput
@@ -67,8 +73,8 @@ export default function DetailPage({ }) {
             <div id="div_id" className="container py-4" >
                 <Head title={`Urlaubsziel ${_data.name}`} descr={`Wir präsentieren Ihnen: ${_data.tagline}`} />
                 <button onClick={() => navigate(-1)} className="btn mb-4">{`❮`}</button>
-                <div className="row bg-light bg-opacity-75 rounded">
-                    <div className="col">
+                <div className="row bg-light bg-opacity-75 rounded" >
+                    <div className="col p-4" style={{boxShadow: `0px 0px 40px 40px rgba(${containerBorderColor}, .1)`/* , borderBottom: `10px dotted rgba(${containerBorderColor}, .2)`, borderLeft: `10px dotted rgba(${containerBorderColor}, .2)`, borderBottom: `10px dotted rgba(${containerBorderColor}, .2)` */}}>
                         <div className="row">
                             <div id="selected_dest_name" className="col h3">
                                 {_data.name}
@@ -112,7 +118,7 @@ export default function DetailPage({ }) {
                                 </div>
                             </div>
                             <div className="col-12 col-md-6 text-center">
-                                <DetailPageImage assetID={_data.image.sys.id} classname={"img-fluid object-fit-cover rounded"} htmlID={"selected_dest_imagepath"} alt="country" style={{ height: "100%" }} />
+                                <DetailPageImage assetID={_data.image.sys.id} classname={"img-fluid object-fit-cover rounded"} setImgBorderColor={setImgBorderColor} setContainerBorderColor={setContainerBorderColor} containerBorderColor={containerBorderColor} imgBorderColor={imgBorderColor} htmlID={"selected_dest_imagepath"} alt="country" style={{ height: "100%", border: `10px solid ${imgBorderColor}` }} />
                             </div>
                         </div>
                         <div className="row">
@@ -131,7 +137,7 @@ export default function DetailPage({ }) {
                             <div className="col-10">
                             </div>
                         </div>
-                        <div id="map">{countryData.location && <LocationMap location={countryData.location} />}</div>
+                        <div id="map">{countryData.location && <LocationMap location={countryData.location} countryCode={countryData.countryCode} color={containerBorderColor} />}</div>
                     </div>
                 </div>
             </div>
