@@ -1,6 +1,7 @@
 import { useEffect,useState } from "react";
 import fetchData, { fetchDataMulti } from "../../../utils/fetchAPI";
 import { useParams } from "react-router-dom";
+import Head from '../../../utils/Head';
 
 export default function SearchResultPage()
 {
@@ -36,10 +37,45 @@ export default function SearchResultPage()
     {
         console.log("CountryDetails+CardsSearch:", data)
         //Todo Hole Werte
+        data[0].items.forEach(element => {
+            console.log("Land:", element.fields.name)
+        });
+
+        //Compare Country IDs with Links in CountryCards, if no match put name in new array for which the CountryCards have to be fetched
+        let leftoverCountries = data[0].items.map(country => {
+            let matched = false;
+
+            for(let i = 0; i< data[1].items.length; i++)
+            {
+                console.log("Country", country.fields.name , " ID: " ,country.sys.id)
+                console.log("Country", data[1].items[i].fields.name , " LinkID: " ,data[1].items[i].fields.details.sys.id)
+                if(country.sys.id == data[1].items[i].fields.details.sys.id)
+                {
+                    console.log("Found match: ", country.fields.name)
+                    matched = true;
+                    break;
+                }
+            }
+            if(!matched)
+            {
+                return country;
+            }
+        })
+
+        console.log("Countries left:", leftoverCountries);
+
+
+
+
 
     }
 
-    return (<div>SearchResults</div>
+    return (
+        <>
+            <Head title={`Suchergebnisse ${searchTerm}`} descr={`Suchergebnisse für: ${searchTerm}`} />
+            <div>SearchResults</div>
+        </>
+
         
         )
 }
