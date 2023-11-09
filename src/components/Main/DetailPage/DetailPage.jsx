@@ -22,7 +22,7 @@ export default function DetailPage({ }) {
     let [errorResponse, setErrorResponse] = useState("Data is loading...");
 
     function handleData(data) {
-        //console.log("handleData:", data.fields);
+/*         console.log("handleData:", data.fields); */
         if (data.sys.id == "NotFound") {
             setErrorResponse(`${data.sys.id}: ${data.message}`)
         }
@@ -135,7 +135,7 @@ export default function DetailPage({ }) {
                             <div className="col-10">
                             </div>
                         </div>
-                        <div id="map">{countryData.location && <LocationMap location={countryData.location} />}</div>
+                        <div id="map">{countryData.location && <LocationMap location={countryData.location} countryCode={countryData.countryCode} color={containerBorderColor} />}</div>
                     </div>
                 </div>
             </div>
