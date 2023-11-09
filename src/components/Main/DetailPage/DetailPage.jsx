@@ -31,11 +31,11 @@ export default function DetailPage({ }) {
     }
 
     function handleShareBtnURL(data) {
-        console.log("Share:", data.fields.file.url)
+        //console.log("Share:", data.fields.file.url)
         setShareBtnURL(data.fields.file.url);
     }
     function handleNavBtnURL(data) {
-        console.log("Share:", data.fields.file.url)
+        //console.log("Share:", data.fields.file.url)
         setNavBtnURL(data.fields.file.url);
     }
 
@@ -60,7 +60,9 @@ export default function DetailPage({ }) {
         fetchData(navurl, handleNavBtnURL);
     }, []);
 
-    const MainOutput = countryData ? createDetails(countryData) : <ErrorPage errorText={errorResponse}/>
+    const loadingError=false;
+
+    const MainOutput = loadingError == true ? <div>Fehler beim laden</div> : countryData ? createDetails(countryData) : <div>NoData,loading</div>
 
     return (
         MainOutput
