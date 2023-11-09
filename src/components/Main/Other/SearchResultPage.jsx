@@ -11,63 +11,67 @@ export default function SearchResultPage()
     const { searchTerm } = useParams();
     const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries?access_token=${VITE_CF_TOKEN}&query=${searchTerm}`
 
-    const url1 = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries?access_token=${VITE_CF_TOKEN}&content_type=countryDetails&query=${searchTerm}`
-    const url2 = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries?access_token=${VITE_CF_TOKEN}&content_type=countryCard&query=${searchTerm}`
-    //
-    //countryDetails
+    const urlDetails = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries?access_token=${VITE_CF_TOKEN}&content_type=countryDetails&query=${searchTerm}`
+    const urlCards = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries?access_token=${VITE_CF_TOKEN}&content_type=countryCard&query=${searchTerm}`
 
-    const dataReady = new Promise(function(resolve,reject){
+    let cardDataFetchedItems =[];
 
-            setTimeout(()=> {reject(new Error("Da ist was schiefgelaufen."))},10000)
-  
-            resolve("ready")
-    });
-
-    fetchDataMulti([url1,url2],handleSearchResults)
+    fetchDataMulti([urlDetails,urlCards],handleSearchResults)
 
     useEffect(()=> {
-
         //fetchData(url1,handleCountryDetails);
         //fetchData(url2,handleCountryCards);
         //Start Async to Wait for Results
-
     },[])
 
     function handleSearchResults(data)
     {
-        console.log("CountryDetails+CardsSearch:", data)
-        //Todo Hole Werte
-        data[0].items.forEach(element => {
-            console.log("Land:", element.fields.name)
-        });
 
-        //Compare Country IDs with Links in CountryCards, if no match put name in new array for which the CountryCards have to be fetched
-        let leftoverCountries = data[0].items.map(country => {
+        //Baue Array mit Countries bei denen der erste Fetch keine CountryCard daten gefunden hat, suche dann mit den IDs direkt
+        let leftoverCountries = data[0].items.reduce(function(totalArray,currentCountry){
             let matched = false;
 
             for(let i = 0; i< data[1].items.length; i++)
             {
-                console.log("Country", country.fields.name , " ID: " ,country.sys.id)
-                console.log("Country", data[1].items[i].fields.name , " LinkID: " ,data[1].items[i].fields.details.sys.id)
-                if(country.sys.id == data[1].items[i].fields.details.sys.id)
+                if(currentCountry.sys.id == data[1].items[i].fields.details.sys.id)
                 {
-                    console.log("Found match: ", country.fields.name)
                     matched = true;
+                    cardDataFetchedItems.push(data[1].items[i])
                     break;
                 }
             }
             if(!matched)
             {
-                return country;
+                totalArray.push(currentCountry);                
             }
-        })
+            return totalArray;
+        },[]);
 
         console.log("Countries left:", leftoverCountries);
 
 
+        //details.sys.id[match]=
+
+        let detail_Id = leftoverCountries[0].sys.id;
+        const urls = leftoverCountries.map(country => {
+            detail_Id = country.sys.id
+            //const baseUrlCardsMissing = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries?access_token=${VITE_CF_TOKEN}&content_type=countryCard&query=${detail_Id}`
+            const baseUrlCardsMissing = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries?access_token=${VITE_CF_TOKEN}&content_type=countryCard&fields.details.sys.id[match]=${detail_Id}`
+            return baseUrlCardsMissing;
+        });
 
 
+        console.log("MissingURLS:", urls )
+        console.log("FetchedDataItems:", cardDataFetchedItems )
+        fetchDataMulti(urls,handleDataLeft);
+    }
 
+    function handleDataLeft(data)
+    {
+        console.log("FirstData", cardDataFetchedItems);
+        console.log("SecondData", data);
+        //Todo Combine Cards Data
+        cardDataFetchedItems.push(data)
     }
 
     return (
