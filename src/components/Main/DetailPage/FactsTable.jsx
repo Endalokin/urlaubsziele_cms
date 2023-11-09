@@ -34,11 +34,11 @@ export default function FactsTable({languages,residents,area}) {
                 </tr>
                 <tr>
                     <th scope="row" className="col-4">Einwohner</th>
-                    <td className="col-8" id="selected_dest_population">{residents}</td>
+                    <td className="col-8" id="selected_dest_population">{residents.toLocaleString('de-DE')}</td>
                 </tr>
                 <tr>
                     <th scope="row" className="col-4">Fläche</th>
-                    <td className="col-8" id="selected_dest_area">{area}</td>
+                    <td className="col-8" id="selected_dest_area">{`${area.toLocaleString('de-DE')} km²`}</td>
                 </tr>
             </tbody>
         </table>
