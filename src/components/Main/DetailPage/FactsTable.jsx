@@ -8,10 +8,7 @@ export default function FactsTable({languages,residents,area}) {
     const [countryLanguages,setCountryLanguages] = useState([]);
     const {VITE_CF_TOKEN,VITE_SPACE_ID} = import.meta.env;
 
-    //console.log("LangArray:", countryLanguages);
-
     const id= languages[0].sys.id;
-    //console.log("Languages:",languages)
     
     useEffect(()=>{
         languages.forEach( element =>{
@@ -23,7 +20,6 @@ export default function FactsTable({languages,residents,area}) {
 
     function handleLanguageData(languageData)
     {
-        //console.log("LanguageData:" , languageData);
         setCountryLanguages((prev)=> prev.concat(languageData.fields.name));// Murks, Sinnvoll vorher Anzahl festzulegen
     }
 

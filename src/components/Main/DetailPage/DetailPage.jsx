@@ -126,18 +126,18 @@ export default function DetailPage({ }) {
                                 <div className="row">
                                     <div className=" col">
                                         <a href="#page_top"  >
-                                            <img src={navBtnURL} className="topimg" />
+                                            <img src={navBtnURL} className="topimg" alt="to-top-button" />
                                         </a>
                                     </div>
                                     <div className="sharecountry col">
-                                        <img src={shareBtnURL} className="shareimg" />
+                                        <img src={shareBtnURL} className="shareimg" alt="share-button" />
                                     </div>
                                 </div>
                             </div>
                             <div className="col-10">
                             </div>
                         </div>
-                        <div id="map">{countryData.location && <LocationMap location={countryData.location} countryCode={countryData.countryCode} color={containerBorderColor} />}</div>
+                        <div>{countryData.location && <LocationMap location={countryData.location} countryCode={countryData.countryCode} color={containerBorderColor} />}</div>
                     </div>
                 </div>
             </div>

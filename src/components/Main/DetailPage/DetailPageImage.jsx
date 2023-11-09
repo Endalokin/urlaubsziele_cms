@@ -7,23 +7,14 @@ export default function DetailPageImage({ assetID, classname, htmlID, alt, style
     const { VITE_CF_TOKEN, VITE_SPACE_ID, VITE_SIGHTENGINE_USER, VITE_SIGHTENGINE_SECRET } = import.meta.env;
     const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/${assetID}?access_token=${VITE_CF_TOKEN}`
 
-
-
-    //  <img id="selected_dest_imagepath" src="images/schweden_800px.jpg" alt="country" className="img-fluid object-fit-cover rounded" style={{ height: "100%" }} />
-
     useEffect(() => {
-
         fetchData(url, handleAssetData)
-
-
     }, []);
 
     function handleAssetData(assetData) {
         //console.log("Asset:", assetData);
         setImgURL(assetData.fields.file.url)
     }
-
-
 
     function handleColorData(data) {
         if (data?.colors) {
