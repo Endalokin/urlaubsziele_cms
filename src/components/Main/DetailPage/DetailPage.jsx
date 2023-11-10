@@ -12,30 +12,21 @@ import ErrorPage from '../Other/ErrorPage';
 
 export default function DetailPage({ }) {
 
-
-
-    //https://app.contentful.com/spaces/8es1vct37z1y/assets/79MohGKY7i8ilc0OSAa288
-
-    //const id = "11kuRvuGnGSd85UbY0i5ao";
     const { id } = useParams();
     const { VITE_CF_TOKEN, VITE_SPACE_ID } = import.meta.env;
     let [errorResponse, setErrorResponse] = useState("Data is loading...");
 
     function handleData(data) {
-/*         console.log("handleData:", data.fields); */
         if (data.sys.id == "NotFound") {
             setErrorResponse(`${data.sys.id}: ${data.message}`)
         }
-
         setCountryData(data.fields)
     }
 
     function handleShareBtnURL(data) {
-        //console.log("Share:", data.fields.file.url)
         setShareBtnURL(data.fields.file.url);
     }
     function handleNavBtnURL(data) {
-        //console.log("Share:", data.fields.file.url)
         setNavBtnURL(data.fields.file.url);
     }
 
@@ -43,8 +34,6 @@ export default function DetailPage({ }) {
     const [countryData, setCountryData] = useState();
     const [shareBtnURL, setShareBtnURL] = useState();
     const [navBtnURL, setNavBtnURL] = useState();
-
-    //tmp url for single Entry
 
     const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries/${id}?access_token=${VITE_CF_TOKEN}`
     const shareurl = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/48CvpYGYtsrxDC9QQr2xi9?access_token=${VITE_CF_TOKEN}`
@@ -60,9 +49,7 @@ export default function DetailPage({ }) {
         fetchData(navurl, handleNavBtnURL);
     }, []);
 
-    const loadingError=false;
-
-    const MainOutput = loadingError == true ? <div>Fehler beim laden</div> : countryData ? createDetails(countryData) : <div>NoData,loading</div>
+    const MainOutput = countryData ? createDetails(countryData) : <ErrorPage errorText={errorResponse}/>
 
     return (
         MainOutput
@@ -74,9 +61,9 @@ export default function DetailPage({ }) {
                 <Head title={`Urlaubsziel ${_data.name}`} descr={`Wir präsentieren Ihnen: ${_data.tagline}`} />
                 <button onClick={() => navigate(-1)} className="btn mb-4">{`❮`}</button>
                 <div className="row bg-light bg-opacity-75 rounded" >
-                    <div className="col p-4" style={{boxShadow: `0px 0px 40px 40px rgba(${containerBorderColor}, .1)`/* , borderBottom: `10px dotted rgba(${containerBorderColor}, .2)`, borderLeft: `10px dotted rgba(${containerBorderColor}, .2)`, borderBottom: `10px dotted rgba(${containerBorderColor}, .2)` */}}>
+                    <div className="col p-5" style={{borderImage: `linear-gradient(to bottom, #fff, rgb(${containerBorderColor}), #fff) 5 20%`,borderRight: "2px", borderLeft: "2px", borderStyle:"solid"/* , boxShadow: `0px 0px 40px 40px rgba(${containerBorderColor}, .1)` *//* , borderBottom: `10px dotted rgba(${containerBorderColor}, .2)`, borderLeft: `10px dotted rgba(${containerBorderColor}, .2)`, borderBottom: `10px dotted rgba(${containerBorderColor}, .2)` */}}>
                         <div className="row">
-                            <div id="selected_dest_name" className="col h3">
+                            <div id="selected_dest_name" className="col h3" >
                                 {_data.name}
                             </div>
                         </div>
@@ -126,18 +113,18 @@ export default function DetailPage({ }) {
                                 <div className="row">
                                     <div className=" col">
                                         <a href="#page_top"  >
-                                            <img src={navBtnURL} className="topimg" />
+                                            <img src={navBtnURL} className="topimg" alt="to-top-button" />
                                         </a>
                                     </div>
                                     <div className="sharecountry col">
-                                        <img src={shareBtnURL} className="shareimg" />
+                                        <img src={shareBtnURL} className="shareimg" alt="share-button" />
                                     </div>
                                 </div>
                             </div>
                             <div className="col-10">
                             </div>
                         </div>
-                        <div id="map">{countryData.location && <LocationMap location={countryData.location} countryCode={countryData.countryCode} color={containerBorderColor} />}</div>
+                        <div>{countryData.location && <LocationMap location={countryData.location} countryCode={countryData.countryCode} color={containerBorderColor} />}</div>
                     </div>
                 </div>
             </div>
