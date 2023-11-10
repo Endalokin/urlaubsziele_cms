@@ -25,24 +25,18 @@ export async function fetchDataMulti(urls,dataCallback,abortSignal)
 {
     const timeStamp = Date.now();
 
-    console.log("URLS:",urls);
+    //console.log("URLS:",urls);
     //build fetch with .json for each url
     let requests = [];
     urls.forEach(url => {
-        const request = fetch(url).then(response => {
-            console.log("Response from MultiFetch:",response)
+        const request = fetch(url,abortSignal).then(response => {
+            //console.log("Response from MultiFetch:",response)
             return response.json()});
         requests.push(request);
     });
 
     try{
-
         const data = await Promise.all(requests)
-
-        //const response = await fetch(urls,{abortSignal});
-        //console.log("Response", response);
-        //const data = await response.json();
-        console.log("Data", data);
         dataCallback(data,timeStamp);
     }
     catch(error)
