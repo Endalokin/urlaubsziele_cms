@@ -2,6 +2,8 @@ import { useEffect,useState } from "react";
 import fetchData, { fetchDataMulti } from "../../../utils/fetchAPI";
 import { useParams } from "react-router-dom";
 import Head from '../../../utils/Head';
+import Card from "../Cards/Card";
+import CardPages from "../Cards/CardPages";
 
 export default function SearchResultPage()
 {
@@ -101,10 +103,30 @@ export default function SearchResultPage()
         setSearchResults(cardDataFetchedItems);
     }
 
+
+
+    function createCards () {
+
+            return searchResults?.map((country) => <Card
+            key={country?.fields.name}
+            country={country?.fields.name}
+            imgId={country?.fields.image.sys.id}
+            text={country?.fields.teaserText}
+            detailsId={country?.fields.details.sys.id} />)
+        
+
+    }
+
+
+
     return (
         <>
             <Head title={`Suchergebnisse ${searchTerm}`} descr={`Suchergebnisse für: ${searchTerm}`} />
-            <div>SearchResults</div>
+            <div>
+            {searchResults.length ? <CardPages countryCards={createCards()} /> : <div>Keine Ergebnisse für {searchTerm} </div>  }
+            </div>
+
+
         </>
 
         
