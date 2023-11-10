@@ -21,7 +21,6 @@ export default function Header() {
     }, []);
 
     function handleLogoURL(data) {
-        //console.log("Logo:",data.fields.file.url)
         setLogoURL(data.fields.file.url);
     }
 

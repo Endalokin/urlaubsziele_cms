@@ -15,7 +15,6 @@ export default function SearchBar() {
     function handleInput(input)
     {
         const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries?access_token=${VITE_CF_TOKEN}&query=${input}`
-            console.log("SearchTrigger")
             setSearchValue(input)
             fetchData(url,handleSearchResult)
     }
@@ -23,16 +22,13 @@ export default function SearchBar() {
     const handleSubmit = (e) =>
     {
         e.preventDefault();
-        //console.log("Submit: ",e, searchValue)
         navigate(`searchPage/${searchValue}`);
     }
 
     function handleSearchResult(_data,timeStamp)
     {
-        //console.log("SearchResult",_data)
         if(timeStamp > searchResult.timeStamp)
         {
-            //console.log("Overwrite SearchResult",_data, "NewTime:", timeStamp,"OldTime:", searchResult.timeStamp);
             setSearchResult({data: _data,timeStamp:timeStamp});
         }
         else{

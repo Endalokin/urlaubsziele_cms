@@ -12,30 +12,21 @@ import ErrorPage from '../Other/ErrorPage';
 
 export default function DetailPage({ }) {
 
-
-
-    //https://app.contentful.com/spaces/8es1vct37z1y/assets/79MohGKY7i8ilc0OSAa288
-
-    //const id = "11kuRvuGnGSd85UbY0i5ao";
     const { id } = useParams();
     const { VITE_CF_TOKEN, VITE_SPACE_ID } = import.meta.env;
     let [errorResponse, setErrorResponse] = useState("Data is loading...");
 
     function handleData(data) {
-/*         console.log("handleData:", data.fields); */
         if (data.sys.id == "NotFound") {
             setErrorResponse(`${data.sys.id}: ${data.message}`)
         }
-
         setCountryData(data.fields)
     }
 
     function handleShareBtnURL(data) {
-        //console.log("Share:", data.fields.file.url)
         setShareBtnURL(data.fields.file.url);
     }
     function handleNavBtnURL(data) {
-        //console.log("Share:", data.fields.file.url)
         setNavBtnURL(data.fields.file.url);
     }
 
@@ -43,8 +34,6 @@ export default function DetailPage({ }) {
     const [countryData, setCountryData] = useState();
     const [shareBtnURL, setShareBtnURL] = useState();
     const [navBtnURL, setNavBtnURL] = useState();
-
-    //tmp url for single Entry
 
     const url = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/entries/${id}?access_token=${VITE_CF_TOKEN}`
     const shareurl = `https://cdn.contentful.com/spaces/${VITE_SPACE_ID}/assets/48CvpYGYtsrxDC9QQr2xi9?access_token=${VITE_CF_TOKEN}`
