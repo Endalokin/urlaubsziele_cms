@@ -3,6 +3,7 @@ import SearchBar from './SearchBar'
 import { HashLink } from 'react-router-hash-link'
 import { useState, useEffect } from 'react'
 import fetchData from '../../utils/fetchAPI';
+import { NavLink } from 'react-router-dom';
 
 export default function Header() {
 
@@ -16,11 +17,10 @@ export default function Header() {
     useEffect(() => {
 
 
-        fetchData(url,handleLogoURL)
-    },[]);
+        fetchData(url, handleLogoURL)
+    }, []);
 
-    function handleLogoURL(data)
-    {
+    function handleLogoURL(data) {
         //console.log("Logo:",data.fields.file.url)
         setLogoURL(data.fields.file.url);
     }
@@ -35,9 +35,9 @@ export default function Header() {
         <header>
             <nav id="page_top" className="navbar navbar-expand-lg sticky-top bg-body-tertiary">
                 <div className="container-fluid container mx-auto justify">
-                    <a className="navbar-brand" href="#">
+                    <NavLink className="nav-link active" to="/">
                         <img src={logoURL} alt="Logo" width="100" />
-                    </a>
+                    </NavLink>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation" onClick={toggleDisplay}>
                         <span className="navbar-toggler-icon"></span>
                     </button>
