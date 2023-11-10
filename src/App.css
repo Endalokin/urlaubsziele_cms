@@ -11,13 +11,11 @@
 }
 
 .shareimg, .topimg{
-    /*filter: invert(50%);*/ 
     -webkit-filter: invert(20%);
     height: 30px;
-    /*filter: hue-rotate(90deg);
-    filter: brightness(5.25);*/
     filter: brightness(0.9) invert(.35) sepia(.5) hue-rotate(180deg) saturate(2000%);
     transition:all 0.3s ease-in;
+    color: black !important;
 
 
 

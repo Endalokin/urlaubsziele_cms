@@ -24,7 +24,6 @@ export default function Main() {
             <div id="overview" ref={overview_ref}>
                 <Cards />
             </div>
-
         </main>
     )
 }

@@ -18,7 +18,7 @@ export default function Card({ country, imgId, text, detailsId }) {
     return (
         <>
             <div className="col">
-                <div className="td_selector card h-100 shadow border-light active" data-traveldest="Frankreich" style={{ overflow: "hidden" }}>
+                <div className="td_selector card h-100 shadow border-light active" style={{ overflow: "hidden" }}>
                     <NavLink to={`/detailPage/${detailsId}`} className="link-dark link-underline link-underline-opacity-0">
                         <img src={imgUrl} alt="" className="card-img-top object-fit-cover" style={{ height: "30vh", minHeight: "4em" }} />
                         <div className="card-img-overlay d-md-none text-center text-bg-dark bg-opacity-50" style={{ height: "10vh", minHeight: "2em", margin: "auto", display: "flex", justifyContent: "center", alignItems: "center" }}>
