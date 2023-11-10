@@ -72,9 +72,9 @@ export default function DetailPage({ }) {
                 <Head title={`Urlaubsziel ${_data.name}`} descr={`Wir präsentieren Ihnen: ${_data.tagline}`} />
                 <button onClick={() => navigate(-1)} className="btn mb-4">{`❮`}</button>
                 <div className="row bg-light bg-opacity-75 rounded" >
-                    <div className="col p-4" style={{boxShadow: `0px 0px 40px 40px rgba(${containerBorderColor}, .1)`/* , borderBottom: `10px dotted rgba(${containerBorderColor}, .2)`, borderLeft: `10px dotted rgba(${containerBorderColor}, .2)`, borderBottom: `10px dotted rgba(${containerBorderColor}, .2)` */}}>
+                    <div className="col p-5" style={{borderImage: `linear-gradient(to bottom, #fff, rgb(${containerBorderColor}), #fff) 5 20%`,borderRight: "2px", borderLeft: "2px", borderStyle:"solid"/* , boxShadow: `0px 0px 40px 40px rgba(${containerBorderColor}, .1)` *//* , borderBottom: `10px dotted rgba(${containerBorderColor}, .2)`, borderLeft: `10px dotted rgba(${containerBorderColor}, .2)`, borderBottom: `10px dotted rgba(${containerBorderColor}, .2)` */}}>
                         <div className="row">
-                            <div id="selected_dest_name" className="col h3">
+                            <div id="selected_dest_name" className="col h3" >
                                 {_data.name}
                             </div>
                         </div>
