@@ -117,15 +117,27 @@ export default function SearchResultPage()
 
     }
 
+    function noResults()
+    {
+        return(
+        <>
+        <div className="container text-center text-md-start mt-5">
+            <div className="row mt-3">
+                <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
+                    <div>Keine Ergebnisse für {searchTerm} </div> 
+                </div>
+            </div>
+        </div>
+        </>)
 
+    }
 
     return (
         <>
             <Head title={`Suchergebnisse ${searchTerm}`} descr={`Suchergebnisse für: ${searchTerm}`} />
             <div>
-            {searchResults.length ? <CardPages countryCards={createCards()} /> : <div>Keine Ergebnisse für {searchTerm} </div>  }
+            {searchResults.length ? <CardPages countryCards={createCards()} /> : noResults()  }
             </div>
-
 
         </>
 

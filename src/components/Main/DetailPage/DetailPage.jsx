@@ -58,7 +58,7 @@ export default function DetailPage({ }) {
 
     //const loadingError=false;
 
-    const MainOutput = countryData ? createDetails(countryData) : <ErrorPage errorText={errorResponse}/>
+    const MainOutput = countryData ? createDetails(countryData) : <ErrorPage erro   rText={errorResponse}/>
     //const MainOutput = loadingError == true ? <div>Fehler beim laden</div> : countryData ? createDetails(countryData) : <div>NoData,loading</div>
 
     return (
